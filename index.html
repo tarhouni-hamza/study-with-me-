@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study Timer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app" id="app" data-phase="focus">
+  <main>
+    <h1>Study session</h1>
+    <div class="phase" id="phase">Focus block 1</div>
+    <p class="quote" id="quote"></p>
+
+    <div class="ringwrap">
+      <svg viewBox="0 0 280 280" aria-hidden="true">
+        <circle class="track" cx="140" cy="140" r="122" fill="none" stroke-width="14"/>
+        <circle class="bar" id="bar" cx="140" cy="140" r="122" fill="none" stroke-width="14"/>
+      </svg>
+      <div class="time" id="time"><span id="clock">50:00</span><small id="sub">left in this block</small></div>
+    </div>
+
+    <div class="row">
+      <button buttonclass="main" id="go">Start</button>
+      <button id="skip">Skip</button>
+      <button id="reset">Reset</button>
+    </div>
+
+    <div class="stats">
+      <div><b id="tleft">8:00:00</b><span>left in session</span></div>
+      <div><b id="focused">0h 00m</b><span>focused</span></div>
+      <div><b id="done">0</b><span>blocks done</span></div>
+    </div>
+
+    <div class="ledger" id="ledger"></div>
+    <p class="cap">Each bar is one focus + break cycle</p>
+
+    <div class="set">
+      <button class="chip" data-f="25" data-b="5">25 / 5</button>
+      <button class="chip" data-f="50" data-b="10">50 / 10</button>
+      <button class="chip" data-f="90" data-b="20">90 / 20</button>
+      <select id="hours" aria-label="Session length in hours">
+        <option value="1">1 h</option><option value="2">2 h</option><option value="3">3 h</option>
+        <option value="4">4 h</option><option value="6">6 h</option><option value="8">8 h</option>
+        <option value="10">10 h</option><option value="12">12 h</option>
+      </select>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

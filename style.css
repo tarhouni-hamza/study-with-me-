@@ -1,0 +1,263 @@
+:root {
+  --bg: #eef1f7;
+  --ink: #121826;
+  --muted: #566075;
+  --track: #d6dce9;
+  --focus: #d97000;
+  --brk: #0d8a82;
+  --btn-ink: #ffffff;
+  
+  --radius-full: 999px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  
+  --transition-speed: 0.4s;
+  --transition-fast: 0.3s;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1220;
+    --ink: #eef1f8;
+    --muted: #98a2ba;
+    --track: #26304a;
+    --focus: #ffb12b;
+    --brk: #3fd0c4;
+    --btn-ink: #10131c;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: Sora, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.app {
+  --acc: var(--focus);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.app[data-phase="break"] {
+  --acc: var(--brk);
+}
+
+main {
+  width: 100%;
+  max-width: 520px;
+  padding: 24px 20px 40px;
+}
+
+h1 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--muted);
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.phase {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 18px 0 6px;
+  text-align: center;
+  color: var(--acc);
+  transition: color var(--transition-speed) ease;
+}
+
+.quote {
+  min-height: 3em;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 auto 8px;
+  max-width: 34ch;
+}
+
+.ringwrap {
+  position: relative;
+  width: min(78vw, 300px);
+  aspect-ratio: 1;
+  margin: 8px auto;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  display: block;
+}
+
+.track {
+  stroke: var(--track);
+}
+
+.bar {
+  stroke: var(--acc);
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--transition-fast) linear, stroke var(--transition-speed) ease;
+}
+
+.time {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(44px, 13vw, 68px);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.time.long {
+  font-size: clamp(36px, 10vw, 52px);
+}
+
+.time small {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 22px 0;
+}
+
+button, select {
+  font: inherit;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--track);
+  background: transparent;
+  color: var(--ink);
+  padding: 11px 18px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover:not(:disabled), select:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:focus-visible, select:focus-visible {
+  outline: 3px solid var(--acc);
+  outline-offset: 2px;
+}
+
+button.main {
+  background: var(--acc);
+  border-color: var(--acc);
+  color: var(--btn-ink);
+  min-width: 150px;
+  font-size: 16px;
+  transition: background var(--transition-speed) ease, transform 0.1s ease;
+}
+
+button.main:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+button:disabled, select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+
+.stats b {
+  display: block;
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.ledger {
+  display: flex;
+  gap: 6px;
+  margin-top: 22px;
+}
+
+.seg {
+  flex: 1;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--track);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 0;
+  background: var(--focus);
+  transition: width 0.4s ease;
+}
+
+.cap {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  margin: 8px 0 0;
+}
+
+.set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+.chip {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+select {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: var(--radius-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar, .phase, button.main, .fill {
+    transition: none;
+  }
+}
